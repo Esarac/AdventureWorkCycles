@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Address</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="../css/shards.min.css">
+</head>
+<body>
+	<div class="container ml-2">
+		<div class="row">
+			<div class="col-md-10">
+				<div>
+					<h2 class="my-5">Edit Address</h2>
+					<form action="#" th:action="@{/address/edit/}+${address.addressid}" th:object="${address}" method="post">
+						<div>
+							<div class="form-group" hidden>
+								<label>addressid</label>
+								<input class="form-control" type="number" placeholder="addressid" th:field="*{addressid}" readonly/>
+								<span th:if="${#fields.hasErrors('addressid')}" th:errors="*{addressid}" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label>addressline1</label>
+								<input class="form-control" type="text" placeholder="addressline1" th:field="*{addressline1}" />
+								<span th:if="${#fields.hasErrors('addressline1')}" th:errors="*{addressline1}" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label>addressline2</label>
+								<input class="form-control" type="text" placeholder="addressline2" th:field="*{addressline2}" />
+								<span th:if="${#fields.hasErrors('addressline2')}" th:errors="*{addressline2}" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label>city</label>
+								<input class="form-control" type="text" placeholder="city" th:field="*{city}" />
+								<span th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label>postalcode</label>
+								<input class="form-control" type="text" placeholder="postalcode" th:field="*{postalcode}" />
+								<span th:if="${#fields.hasErrors('postalcode')}" th:errors="*{postalcode}" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label>spatiallocation</label>
+								<input class="form-control" type="text" placeholder="spatiallocation" th:field="*{spatiallocation}" />
+								<span th:if="${#fields.hasErrors('spatiallocation')}" th:errors="*{spatiallocation}" class="text-danger"></span>
+							</div>
+							<div class="form-group">
+								<label>stateprovince</label>
+								<select class="form-control" th:field="*{stateprovince}">
+									<option th:each="s : ${stateprovinces}" th:value="${s.stateprovinceid}" th:text="${s.stateprovinceid}"></option>
+								</select>
+								<span th:if="${#fields.hasErrors('stateprovince')}" th:errors="*{stateprovince}" class="text-danger"></span>
+							</div>
+						</div>
+						<div class="row">
+							<p class="col-sm-1">
+								<button type="submit" value="Submit" name="action" class="btn btn-primary">
+									<i class="fas fa-check"></i>
+								</button>
+							</p>
+							<p class="col-sm-1">
+								<button type="submit" value="Cancel" name="action" class="btn btn-primary">
+									<i class="fas fa-times"></i>
+								</button>
+							</p>
+							<p class="col-sm-1">
+								<button type="reset" value="Clear" name="action" class="btn btn-primary">
+									<i class="fas fa-eraser"></i>
+								</button>
+							</p>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
