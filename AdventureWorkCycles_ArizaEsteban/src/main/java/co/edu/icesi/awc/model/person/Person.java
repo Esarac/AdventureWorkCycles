@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -71,8 +72,8 @@ public class Person implements Serializable {
 	private Password password;
 
 	// bi-directional one-to-one association to Businessentity
-	@OneToOne
-	@JoinColumn(insertable = false, updatable = false, name = "businessentityid")
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(insertable = true, updatable = true,name = "businessentityid")
 	private Businessentity businessentity;
 
 	// bi-directional many-to-one association to Personphone

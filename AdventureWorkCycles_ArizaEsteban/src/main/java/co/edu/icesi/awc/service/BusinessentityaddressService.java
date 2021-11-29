@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import co.edu.icesi.awc.dao.BusinessentityaddressDAO;
 import co.edu.icesi.awc.model.person.Address;
 import co.edu.icesi.awc.model.person.Addresstype;
 import co.edu.icesi.awc.model.person.Businessentity;
@@ -19,7 +20,7 @@ import co.edu.icesi.awc.repository.BusinessentityaddressRepository;
 @Service
 public class BusinessentityaddressService{
 	//MainRepo
-	private BusinessentityaddressRepository businessentityaddressRepository;
+	private BusinessentityaddressDAO businessentityaddressRepository;
 	//OtherRepos
 	private AddressRepository addressRepository;
 	private BusinessentityRepository businessentityRepository;
@@ -27,7 +28,7 @@ public class BusinessentityaddressService{
 	
 	
 	//Constructor
-	public BusinessentityaddressService(BusinessentityaddressRepository businessentityaddressRepository, AddressRepository addressRepository, BusinessentityRepository businessentityRepository, AddresstypeRepository addresstypeRepository) {
+	public BusinessentityaddressService(BusinessentityaddressDAO businessentityaddressRepository, AddressRepository addressRepository, BusinessentityRepository businessentityRepository, AddresstypeRepository addresstypeRepository) {
 		this.businessentityaddressRepository = businessentityaddressRepository;
 		this.addressRepository = addressRepository;
 		this.businessentityRepository = businessentityRepository;

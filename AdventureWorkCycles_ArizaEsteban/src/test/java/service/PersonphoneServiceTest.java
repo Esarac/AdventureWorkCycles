@@ -1,4 +1,4 @@
-package unit.service;
+package service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.awc.AdventureWorkCyclesArizaEstebanApplication;
+import co.edu.icesi.awc.dao.PersonphoneDAO;
 import co.edu.icesi.awc.model.person.Person;
 import co.edu.icesi.awc.model.person.Personphone;
 import co.edu.icesi.awc.model.person.PersonphonePK;
@@ -38,19 +39,11 @@ public class PersonphoneServiceTest {
 	@InjectMocks
 	private PersonphoneService personphoneService;
 	@Mock
-	private PersonphoneRepository personphoneRepository;
+	private PersonphoneDAO personphoneRepository;
 	@Mock
 	private PersonRepository personRepository;
 	@Mock
 	private PhonenumbertypeRepository phonenumbertyperepository;
-	
-	@Autowired
-	public PersonphoneServiceTest(PersonphoneService personphoneService, PersonphoneRepository personphoneRepository, PersonRepository personRepository, PhonenumbertypeRepository phonenumbertyperepository) {
-		this.personphoneService = personphoneService;
-		this.personphoneRepository = personphoneRepository;
-		this.personRepository = personRepository;
-		this.phonenumbertyperepository = phonenumbertyperepository;
-	}
 	
 	@Nested
 	@Tag("create")

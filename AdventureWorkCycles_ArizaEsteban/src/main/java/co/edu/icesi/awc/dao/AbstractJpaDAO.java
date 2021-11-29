@@ -2,6 +2,7 @@ package co.edu.icesi.awc.dao;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -18,8 +19,9 @@ public abstract class AbstractJpaDAO<T extends Serializable, K> {
 	      this.clazz = clazzToSet;
 	   }
 
-	   public T findById(K id){
-	      return entityManager.find(clazz, id);
+	   public Optional<T> findById(K id){
+		  T entity = entityManager.find(clazz, id);
+	      return entity != null ? Optional.of(entity) : Optional.empty();
 	   }
 	   
 	   public List<T> findAll(){
@@ -46,7 +48,9 @@ public abstract class AbstractJpaDAO<T extends Serializable, K> {
 	   
 	   @Transactional
 	   public void deleteById(K id){
-	      T entity = findById(id);
-	      delete(entity);
+		  Optional<T> entityOptional = findById(id);
+		  if(entityOptional.isPresent()) {
+			  delete(entityOptional.get());
+		  }
 	   }
 	}

@@ -1,4 +1,4 @@
-package unit.service;
+package service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.awc.AdventureWorkCyclesArizaEstebanApplication;
+import co.edu.icesi.awc.dao.AddressDAO;
 import co.edu.icesi.awc.model.person.Address;
 import co.edu.icesi.awc.model.person.Stateprovince;
 import co.edu.icesi.awc.repository.AddressRepository;
@@ -35,16 +36,9 @@ public class AddressServiceTest {
 	@InjectMocks
 	private AddressService addressService;
 	@Mock
-	private AddressRepository addressRepository;
+	private AddressDAO addressRepository;
 	@Mock
 	private StateprovinceRepository stateprovinceRepository;
-	
-	@Autowired
-	public AddressServiceTest(AddressService addressService, AddressRepository addressRepository, StateprovinceRepository stateprovinceRepository) {
-		this.addressService = addressService;
-		this.addressRepository = addressRepository;
-		this.stateprovinceRepository = stateprovinceRepository;
-	}
 	
 	@Nested
 	@Tag("create")

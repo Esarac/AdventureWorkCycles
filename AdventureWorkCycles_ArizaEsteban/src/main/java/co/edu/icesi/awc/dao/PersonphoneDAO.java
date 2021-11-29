@@ -3,6 +3,7 @@ package co.edu.icesi.awc.dao;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -37,13 +38,22 @@ public class PersonphoneDAO extends AbstractJpaDAO<Personphone, PersonphonePK>{
 		return q.getResultList();
 	}
 	
-	public List<Personphone> specialQuery(){
-		TypedQuery<Personphone> q = entityManager.createQuery(
-				"from Person p, Personphone h, Phonetype t" + 
-				"inner join " +
-				" where ", Personphone.class);
+	public List<Personphone> specialQuery(){//2.B
+		TypedQuery<Personphone> q = entityManager.createQuery(""
+				+ "SELECT p "
+				+ "FROM Personphone p "
+				+ "WHERE "
+				//Person
+				+ "(SELECT person.businessentityid "
+				+ "FROM Person person, Personphone phone, Phonenumbertype type "
+				+ "WHERE person.businessentityid = phone.id.businessentityid and phone.id.phonenumbertypeid = type.phonenumbertypeid "
+				+ "GROUP BY person.businessentityid "
+				+ "HAVING COUNT(DISTINCT type.phonenumbertypeid)>1)"
+				//...
+				+ " = p.id.businessentityid"
+				, Personphone.class);
 		
 		return q.getResultList();
-	}//Terminar (2.B)
+	}
 	
 }

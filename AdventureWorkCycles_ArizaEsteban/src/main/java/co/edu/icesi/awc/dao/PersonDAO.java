@@ -3,6 +3,7 @@ package co.edu.icesi.awc.dao;
 import java.sql.Timestamp;
 import java.util.List;
 
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;
@@ -36,14 +37,20 @@ public class PersonDAO extends AbstractJpaDAO<Person, Integer>{
 		return q.getResultList();
 	}
 	
-	public List<Person> specialQuery(Timestamp start, Timestamp end){
-		TypedQuery<Person> q = entityManager.createQuery(
-				"from " + TABLE +
-				" where ", Person.class);
+	public List<?> specialQuery(Timestamp start, Timestamp end){//2.A
+		Query q = entityManager.createQuery(""
+				+ "SELECT person, COUNT(*) "
+				+ "FROM Person person, Businessentityaddress bea, Address address "
+				+ "WHERE person.businessentityid = bea.id.businessentityid "
+				+ "AND address.addressid = bea.id.addressid "
+				+ "AND address.modifieddate BETWEEN :start AND :end "
+				+ "GROUP BY person "
+				+ "ORDER BY person.lastname ASC "
+				);
 		q.setParameter("start", start);
 		q.setParameter("end", end);
 		
 		return q.getResultList();
-	}//Terminar (2.A)
+	}
 	
 }

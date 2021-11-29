@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import co.edu.icesi.awc.dao.AddressDAO;
 import co.edu.icesi.awc.model.person.Address;
 import co.edu.icesi.awc.model.person.Stateprovince;
 import co.edu.icesi.awc.repository.AddressRepository;
@@ -15,13 +16,13 @@ import co.edu.icesi.awc.repository.StateprovinceRepository;
 @Service
 public class AddressService{
 	//MainRepo
-	private AddressRepository addressRepository;
+	private AddressDAO addressRepository;
 	//OtherRepos
 	private StateprovinceRepository stateprovinceRepository;
 	
 	//Constructor
 	@Autowired
-	public AddressService(AddressRepository addressRepository, StateprovinceRepository stateprovinceRepository) {
+	public AddressService(AddressDAO addressRepository, StateprovinceRepository stateprovinceRepository) {
 		this.addressRepository = addressRepository;
 		this.stateprovinceRepository = stateprovinceRepository;
 	}

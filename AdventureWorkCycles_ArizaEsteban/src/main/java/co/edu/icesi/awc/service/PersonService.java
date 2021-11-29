@@ -8,20 +8,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.edu.icesi.awc.repository.BusinessentityRepository;
-import co.edu.icesi.awc.repository.PersonRepository;
+import co.edu.icesi.awc.dao.PersonDAO;
 import co.edu.icesi.awc.model.person.Businessentity;
 import co.edu.icesi.awc.model.person.Person;
 
 @Service
 public class PersonService{
 	//MainRepo
-	private PersonRepository personRepository;
+	private PersonDAO personRepository;
+	
 	//OtherRepos
 	private BusinessentityRepository businessentityRepository;
 	
 	//Constructor
 	@Autowired
-	public PersonService(PersonRepository personRepository, BusinessentityRepository businessentityRepository) {
+	public PersonService(PersonDAO personRepository, BusinessentityRepository businessentityRepository) {
 		this.personRepository = personRepository;
 		this.businessentityRepository = businessentityRepository;
 	}
@@ -31,25 +32,23 @@ public class PersonService{
 	public Person save(Person entity) {
 		Person sPerson = null;
 		
-		//boolean modifieddateV = entity.getModifieddate() != null;
 		boolean firstnameV = (entity.getFirstname() != null) && (entity.getFirstname().length() >= 3);
 		boolean lastnameV = (entity.getLastname() != null) && (entity.getLastname().length() >= 3);
 		
-		if(/*modifieddateV &&*/ firstnameV && lastnameV){
+		if(firstnameV && lastnameV){
 			entity.setModifieddate(Timestamp.from(Instant.now()));
 			
-			if(entity.getBusinessentity() != null) {
-				this.businessentityRepository.save(entity.getBusinessentity());
-			}
-			else {
+			if(entity.getBusinessentity() == null) {
+				//Businessentity
 				Businessentity newBusinessentity = new Businessentity();
 				newBusinessentity.setModifieddate(entity.getModifieddate());
 				
+				newBusinessentity = this.businessentityRepository.save(newBusinessentity);
+				
 				entity.setBusinessentity(newBusinessentity);
-				
-				this.businessentityRepository.save(entity.getBusinessentity());
+				//...
 			}
-				
+			
 			sPerson = this.personRepository.save(entity);
 		}
 		

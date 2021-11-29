@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import co.edu.icesi.awc.dao.PersonphoneDAO;
 import co.edu.icesi.awc.model.person.Person;
 import co.edu.icesi.awc.model.person.Personphone;
 import co.edu.icesi.awc.model.person.PersonphonePK;
@@ -18,14 +19,14 @@ import co.edu.icesi.awc.repository.PhonenumbertypeRepository;
 @Service
 public class PersonphoneService{
 	//MainRepo
-	private PersonphoneRepository personphoneRepository;
+	private PersonphoneDAO personphoneRepository;
 	//OtherRepos
 	private PersonRepository personRepository;
 	private PhonenumbertypeRepository phonenumbertypeRepository;
 	
 	
 	//Constructor
-	public PersonphoneService(PersonphoneRepository personphoneRepository, PersonRepository personRepository, PhonenumbertypeRepository phonenumbertypeRepository) {
+	public PersonphoneService(PersonphoneDAO personphoneRepository, PersonRepository personRepository, PhonenumbertypeRepository phonenumbertypeRepository) {
 		this.personphoneRepository = personphoneRepository;
 		this.personRepository = personRepository;
 		this.phonenumbertypeRepository = phonenumbertypeRepository;

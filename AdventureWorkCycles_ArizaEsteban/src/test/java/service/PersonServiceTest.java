@@ -1,4 +1,4 @@
-package unit.service;
+package service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.any;
 
 import java.sql.Timestamp;
 import java.util.Optional;
@@ -22,6 +23,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.awc.AdventureWorkCyclesArizaEstebanApplication;
+import co.edu.icesi.awc.dao.PersonDAO;
 import co.edu.icesi.awc.model.person.Businessentity;
 import co.edu.icesi.awc.model.person.Person;
 import co.edu.icesi.awc.repository.BusinessentityRepository;
@@ -36,16 +38,9 @@ public class PersonServiceTest {
 	@InjectMocks
 	private PersonService personService;
 	@Mock
-	private PersonRepository personRepository;
+	private PersonDAO personRepository;
 	@Mock
 	private BusinessentityRepository businessentityRepository;
-	
-	@Autowired
-	public PersonServiceTest(PersonService personService, PersonRepository personRepository, BusinessentityRepository businessentityRepository) {
-		this.personService = personService;
-		this.personRepository = personRepository;
-		this.businessentityRepository = businessentityRepository;
-	}
 	
 	@Nested
 	@Tag("create")
@@ -55,58 +50,33 @@ public class PersonServiceTest {
 		public void saveTestCorrect() {
 			//Set Up
 			Person person1 = new Person();
-			person1.setModifieddate(new Timestamp(0));
 			person1.setFirstname("Esteban");
 			person1.setLastname("Ariza");
 			
 			Businessentity businessentity1 = new Businessentity();
-			person1.setBusinessentity(businessentity1);
 			
 			when(personRepository.save(person1)).thenReturn(person1);
-			when(businessentityRepository.save(businessentity1)).thenReturn(businessentity1);
+			when(businessentityRepository.save( any(Businessentity.class) )).thenReturn(businessentity1);
 			
 			//Method
 			Person personSaver = personService.save(person1);
 			
 			//Asserts
 			assertNotNull(personSaver);
-			assertEquals(personSaver.getModifieddate(), new Timestamp(0));
+			assertNotNull(personSaver.getModifieddate());
 			assertEquals(personSaver.getFirstname(), "Esteban");
 			assertEquals(personSaver.getLastname(), "Ariza");
 			assertEquals(personSaver.getBusinessentity(), businessentity1);
 			
 			verify(personRepository).save(person1);
-			verify(businessentityRepository).save(businessentity1);
-		}
-		
-		@Test
-		public void saveTestWrongModifieddate() {
-			//Set Up
-			Person person1 = new Person();
-			person1.setFirstname("Esteban");
-			person1.setLastname("Ariza");
+			verify(businessentityRepository).save( any(Businessentity.class) );
 			
-			Businessentity businessentity1 = new Businessentity();
-			person1.setBusinessentity(businessentity1);
-			
-			when(personRepository.save(person1)).thenReturn(person1);
-			when(businessentityRepository.save(businessentity1)).thenReturn(businessentity1);
-			
-			//Method
-			Person personSaver = personService.save(person1);
-			
-			//Asserts
-			assertNull(personSaver);
-			
-			verify(personRepository, times(0)).save(person1);
-			verify(businessentityRepository, times(0)).save(businessentity1);
 		}
 		
 		@Test
 		public void saveTestWrongFirstname() {
 			//Set Up
 			Person person1 = new Person();
-			person1.setModifieddate(new Timestamp(0));
 			person1.setFirstname("Es");
 			person1.setLastname("Ariza");
 			
@@ -130,7 +100,6 @@ public class PersonServiceTest {
 		public void saveTestWrongLastname() {
 			//Set Up
 			Person person1 = new Person();
-			person1.setModifieddate(new Timestamp(0));
 			person1.setFirstname("Esteban");
 			person1.setLastname("Ar");
 			
@@ -161,7 +130,6 @@ public class PersonServiceTest {
 			//Set Up
 			Person person1 = new Person();
 			person1.setBusinessentityid(1);
-			person1.setModifieddate(new Timestamp(0));
 			person1.setFirstname("Esteban");
 			person1.setLastname("Ariza");
 			
@@ -172,49 +140,20 @@ public class PersonServiceTest {
 			
 			when(personRepository.findById(1)).thenReturn(Optional.of(person2));
 			when(personRepository.save(person1)).thenReturn(person1);
-			when(businessentityRepository.save(businessentity1)).thenReturn(businessentity1);
 			
 			//Method
 			Person personSaver = personService.update(person1);
 			
 			//Asserts
 			assertNotNull(personSaver);
-			assertEquals(personSaver.getModifieddate(), new Timestamp(0));
+			assertNotNull(personSaver.getModifieddate());
 			assertEquals(personSaver.getFirstname(), "Esteban");
 			assertEquals(personSaver.getLastname(), "Ariza");
 			assertEquals(personSaver.getBusinessentity(), businessentity1);
 			
 			verify(personRepository).findById(1);
 			verify(personRepository).save(person1);
-			verify(businessentityRepository).save(businessentity1);
-		}
-		
-		@Test
-		public void updateTestWrongModifieddate() {
-			//Set Up
-			Person person1 = new Person();
-			person1.setBusinessentityid(1);
-			person1.setFirstname("Esteban");
-			person1.setLastname("Ariza");
-			
-			Person person2 = new Person();
-			
-			Businessentity businessentity1 = new Businessentity();
-			person1.setBusinessentity(businessentity1);
-			
-			when(personRepository.findById(1)).thenReturn(Optional.of(person2));
-			when(personRepository.save(person1)).thenReturn(person1);
-			when(businessentityRepository.save(businessentity1)).thenReturn(businessentity1);
-			
-			//Method
-			Person personSaver = personService.update(person1);
-			
-			//Asserts
-			assertNull(personSaver);
-			
-			verify(personRepository).findById(1);
-			verify(personRepository, times(0)).save(person1);
-			verify(businessentityRepository, times(0)).save(businessentity1);
+			verify(businessentityRepository, times(0)).save( any(Businessentity.class) );
 		}
 		
 		@Test
@@ -222,7 +161,6 @@ public class PersonServiceTest {
 			//Set Up
 			Person person1 = new Person();
 			person1.setBusinessentityid(1);
-			person1.setModifieddate(new Timestamp(0));
 			person1.setFirstname("Es");
 			person1.setLastname("Ariza");
 			

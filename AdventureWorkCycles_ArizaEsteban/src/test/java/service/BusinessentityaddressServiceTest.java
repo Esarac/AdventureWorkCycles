@@ -1,4 +1,4 @@
-package unit.service;
+package service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -21,6 +21,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.awc.AdventureWorkCyclesArizaEstebanApplication;
+import co.edu.icesi.awc.dao.BusinessentityaddressDAO;
 import co.edu.icesi.awc.model.person.Address;
 import co.edu.icesi.awc.model.person.Addresstype;
 import co.edu.icesi.awc.model.person.Businessentity;
@@ -40,22 +41,13 @@ public class BusinessentityaddressServiceTest {
 	@InjectMocks
 	private BusinessentityaddressService businessentityaddressService;
 	@Mock
-	private BusinessentityaddressRepository businessentityaddressRepository;
+	private BusinessentityaddressDAO businessentityaddressRepository;
 	@Mock
 	private AddressRepository addressRepository;
 	@Mock
 	private BusinessentityRepository businessentityRepository;
 	@Mock
 	private AddresstypeRepository addresstypeRepository;//No decia en el enunciado
-	
-	@Autowired
-	public BusinessentityaddressServiceTest(BusinessentityaddressService businessentityaddressService, BusinessentityaddressRepository businessentityaddressRepository, AddressRepository addressRepository, BusinessentityRepository businessentityRepository, AddresstypeRepository addresstypeRepository) {
-		this.businessentityaddressService = businessentityaddressService;
-		this.businessentityaddressRepository = businessentityaddressRepository;
-		this.addressRepository = addressRepository;
-		this.businessentityRepository = businessentityRepository;
-		this.addresstypeRepository = addresstypeRepository;
-	}
 	
 	@Nested
 	@Tag("create")
