@@ -19,22 +19,22 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.awc.AdventureWorkCyclesArizaEstebanApplication;
-import co.edu.icesi.awc.dao.AddressDAO;
-import co.edu.icesi.awc.dao.BusinessentityaddressDAO;
-import co.edu.icesi.awc.dao.PersonDAO;
-import co.edu.icesi.awc.dao.PersonphoneDAO;
-import co.edu.icesi.awc.model.person.Address;
-import co.edu.icesi.awc.model.person.Addresstype;
-import co.edu.icesi.awc.model.person.Businessentity;
-import co.edu.icesi.awc.model.person.Businessentityaddress;
-import co.edu.icesi.awc.model.person.BusinessentityaddressPK;
-import co.edu.icesi.awc.model.person.Person;
-import co.edu.icesi.awc.model.person.Personphone;
-import co.edu.icesi.awc.model.person.PersonphonePK;
-import co.edu.icesi.awc.model.person.Phonenumbertype;
-import co.edu.icesi.awc.repository.AddresstypeRepository;
-import co.edu.icesi.awc.repository.BusinessentityRepository;
-import co.edu.icesi.awc.repository.PhonenumbertypeRepository;
+import co.edu.icesi.awc.back.dao.AddressDAO;
+import co.edu.icesi.awc.back.dao.BusinessentityaddressDAO;
+import co.edu.icesi.awc.back.dao.PersonDAO;
+import co.edu.icesi.awc.back.dao.PersonphoneDAO;
+import co.edu.icesi.awc.back.model.person.Address;
+import co.edu.icesi.awc.back.model.person.Addresstype;
+import co.edu.icesi.awc.back.model.person.Businessentity;
+import co.edu.icesi.awc.back.model.person.Businessentityaddress;
+import co.edu.icesi.awc.back.model.person.BusinessentityaddressPK;
+import co.edu.icesi.awc.back.model.person.Person;
+import co.edu.icesi.awc.back.model.person.Personphone;
+import co.edu.icesi.awc.back.model.person.PersonphonePK;
+import co.edu.icesi.awc.back.model.person.Phonenumbertype;
+import co.edu.icesi.awc.back.repository.AddresstypeRepository;
+import co.edu.icesi.awc.back.repository.BusinessentityRepository;
+import co.edu.icesi.awc.back.repository.PhonenumbertypeRepository;
 
 @SpringBootTest
 @ContextConfiguration(classes = AdventureWorkCyclesArizaEstebanApplication.class)

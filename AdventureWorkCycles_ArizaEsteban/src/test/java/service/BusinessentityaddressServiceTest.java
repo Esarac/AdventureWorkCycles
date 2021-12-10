@@ -21,17 +21,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.awc.AdventureWorkCyclesArizaEstebanApplication;
-import co.edu.icesi.awc.dao.BusinessentityaddressDAO;
-import co.edu.icesi.awc.model.person.Address;
-import co.edu.icesi.awc.model.person.Addresstype;
-import co.edu.icesi.awc.model.person.Businessentity;
-import co.edu.icesi.awc.model.person.Businessentityaddress;
-import co.edu.icesi.awc.model.person.BusinessentityaddressPK;
-import co.edu.icesi.awc.repository.AddressRepository;
-import co.edu.icesi.awc.repository.AddresstypeRepository;
-import co.edu.icesi.awc.repository.BusinessentityRepository;
-import co.edu.icesi.awc.repository.BusinessentityaddressRepository;
-import co.edu.icesi.awc.service.BusinessentityaddressService;
+import co.edu.icesi.awc.back.dao.BusinessentityaddressDAO;
+import co.edu.icesi.awc.back.model.person.Address;
+import co.edu.icesi.awc.back.model.person.Addresstype;
+import co.edu.icesi.awc.back.model.person.Businessentity;
+import co.edu.icesi.awc.back.model.person.Businessentityaddress;
+import co.edu.icesi.awc.back.model.person.BusinessentityaddressPK;
+import co.edu.icesi.awc.back.repository.AddressRepository;
+import co.edu.icesi.awc.back.repository.AddresstypeRepository;
+import co.edu.icesi.awc.back.repository.BusinessentityRepository;
+import co.edu.icesi.awc.back.repository.BusinessentityaddressRepository;
+import co.edu.icesi.awc.back.service.BusinessentityaddressService;
 
 @SpringBootTest
 @ContextConfiguration(classes = AdventureWorkCyclesArizaEstebanApplication.class)

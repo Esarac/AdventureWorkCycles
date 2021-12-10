@@ -11,22 +11,22 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
-import co.edu.icesi.awc.dao.AddressDAO;
-import co.edu.icesi.awc.dao.PersonDAO;
-import co.edu.icesi.awc.model.person.Address;
-import co.edu.icesi.awc.model.person.Addresstype;
-import co.edu.icesi.awc.model.person.Person;
-import co.edu.icesi.awc.model.person.Phonenumbertype;
-import co.edu.icesi.awc.model.person.Stateprovince;
-import co.edu.icesi.awc.repository.AddressRepository;
-import co.edu.icesi.awc.repository.AddresstypeRepository;
-import co.edu.icesi.awc.repository.PhonenumbertypeRepository;
-import co.edu.icesi.awc.repository.StateprovinceRepository;
-import co.edu.icesi.awc.security.UserApp;
-import co.edu.icesi.awc.security.UserType;
-import co.edu.icesi.awc.service.AddressService;
-import co.edu.icesi.awc.service.PersonService;
-import co.edu.icesi.awc.service.UserService;
+import co.edu.icesi.awc.back.dao.AddressDAO;
+import co.edu.icesi.awc.back.dao.PersonDAO;
+import co.edu.icesi.awc.back.model.person.Address;
+import co.edu.icesi.awc.back.model.person.Addresstype;
+import co.edu.icesi.awc.back.model.person.Person;
+import co.edu.icesi.awc.back.model.person.Phonenumbertype;
+import co.edu.icesi.awc.back.model.person.Stateprovince;
+import co.edu.icesi.awc.back.repository.AddressRepository;
+import co.edu.icesi.awc.back.repository.AddresstypeRepository;
+import co.edu.icesi.awc.back.repository.PhonenumbertypeRepository;
+import co.edu.icesi.awc.back.repository.StateprovinceRepository;
+import co.edu.icesi.awc.back.security.UserApp;
+import co.edu.icesi.awc.back.security.UserType;
+import co.edu.icesi.awc.back.service.AddressService;
+import co.edu.icesi.awc.back.service.PersonService;
+import co.edu.icesi.awc.back.service.UserService;
 
 @SpringBootApplication
 public class AdventureWorkCyclesArizaEstebanApplication {

@@ -23,12 +23,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.awc.AdventureWorkCyclesArizaEstebanApplication;
-import co.edu.icesi.awc.dao.PersonDAO;
-import co.edu.icesi.awc.model.person.Businessentity;
-import co.edu.icesi.awc.model.person.Person;
-import co.edu.icesi.awc.repository.BusinessentityRepository;
-import co.edu.icesi.awc.repository.PersonRepository;
-import co.edu.icesi.awc.service.PersonService;
+import co.edu.icesi.awc.back.dao.PersonDAO;
+import co.edu.icesi.awc.back.model.person.Businessentity;
+import co.edu.icesi.awc.back.model.person.Person;
+import co.edu.icesi.awc.back.repository.BusinessentityRepository;
+import co.edu.icesi.awc.back.repository.PersonRepository;
+import co.edu.icesi.awc.back.service.PersonService;
 
 @SpringBootTest
 @ContextConfiguration(classes = AdventureWorkCyclesArizaEstebanApplication.class)

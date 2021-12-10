@@ -22,24 +22,24 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.awc.AdventureWorkCyclesArizaEstebanApplication;
-import co.edu.icesi.awc.model.person.Address;
-import co.edu.icesi.awc.model.person.Addresstype;
-import co.edu.icesi.awc.model.person.Businessentity;
-import co.edu.icesi.awc.model.person.Businessentityaddress;
-import co.edu.icesi.awc.model.person.Person;
-import co.edu.icesi.awc.model.person.Personphone;
-import co.edu.icesi.awc.model.person.Phonenumbertype;
-import co.edu.icesi.awc.model.person.Stateprovince;
-import co.edu.icesi.awc.repository.AddressRepository;
-import co.edu.icesi.awc.repository.AddresstypeRepository;
-import co.edu.icesi.awc.repository.BusinessentityRepository;
-import co.edu.icesi.awc.repository.PersonRepository;
-import co.edu.icesi.awc.repository.PhonenumbertypeRepository;
-import co.edu.icesi.awc.repository.StateprovinceRepository;
-import co.edu.icesi.awc.service.AddressService;
-import co.edu.icesi.awc.service.BusinessentityaddressService;
-import co.edu.icesi.awc.service.PersonService;
-import co.edu.icesi.awc.service.PersonphoneService;
+import co.edu.icesi.awc.back.model.person.Address;
+import co.edu.icesi.awc.back.model.person.Addresstype;
+import co.edu.icesi.awc.back.model.person.Businessentity;
+import co.edu.icesi.awc.back.model.person.Businessentityaddress;
+import co.edu.icesi.awc.back.model.person.Person;
+import co.edu.icesi.awc.back.model.person.Personphone;
+import co.edu.icesi.awc.back.model.person.Phonenumbertype;
+import co.edu.icesi.awc.back.model.person.Stateprovince;
+import co.edu.icesi.awc.back.repository.AddressRepository;
+import co.edu.icesi.awc.back.repository.AddresstypeRepository;
+import co.edu.icesi.awc.back.repository.BusinessentityRepository;
+import co.edu.icesi.awc.back.repository.PersonRepository;
+import co.edu.icesi.awc.back.repository.PhonenumbertypeRepository;
+import co.edu.icesi.awc.back.repository.StateprovinceRepository;
+import co.edu.icesi.awc.back.service.AddressService;
+import co.edu.icesi.awc.back.service.BusinessentityaddressService;
+import co.edu.icesi.awc.back.service.PersonService;
+import co.edu.icesi.awc.back.service.PersonphoneService;
 
 @SpringBootTest
 @ContextConfiguration(classes = AdventureWorkCyclesArizaEstebanApplication.class)

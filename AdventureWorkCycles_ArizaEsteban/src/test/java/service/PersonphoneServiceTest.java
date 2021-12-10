@@ -21,15 +21,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import co.edu.icesi.awc.AdventureWorkCyclesArizaEstebanApplication;
-import co.edu.icesi.awc.dao.PersonphoneDAO;
-import co.edu.icesi.awc.model.person.Person;
-import co.edu.icesi.awc.model.person.Personphone;
-import co.edu.icesi.awc.model.person.PersonphonePK;
-import co.edu.icesi.awc.model.person.Phonenumbertype;
-import co.edu.icesi.awc.repository.PersonRepository;
-import co.edu.icesi.awc.repository.PersonphoneRepository;
-import co.edu.icesi.awc.repository.PhonenumbertypeRepository;
-import co.edu.icesi.awc.service.PersonphoneService;
+import co.edu.icesi.awc.back.dao.PersonphoneDAO;
+import co.edu.icesi.awc.back.model.person.Person;
+import co.edu.icesi.awc.back.model.person.Personphone;
+import co.edu.icesi.awc.back.model.person.PersonphonePK;
+import co.edu.icesi.awc.back.model.person.Phonenumbertype;
+import co.edu.icesi.awc.back.repository.PersonRepository;
+import co.edu.icesi.awc.back.repository.PersonphoneRepository;
+import co.edu.icesi.awc.back.repository.PhonenumbertypeRepository;
+import co.edu.icesi.awc.back.service.PersonphoneService;
 
 @SpringBootTest
 @ContextConfiguration(classes = AdventureWorkCyclesArizaEstebanApplication.class)
