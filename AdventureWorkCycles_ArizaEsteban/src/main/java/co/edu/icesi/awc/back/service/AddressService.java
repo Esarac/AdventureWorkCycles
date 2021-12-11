@@ -76,4 +76,8 @@ public class AddressService{
 		addressRepository.delete(entity);
 	}
 	
+	public void delete(Integer addressid) {
+		addressRepository.deleteById(addressid);
+	}
+	
 }

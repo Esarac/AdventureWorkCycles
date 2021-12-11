@@ -93,4 +93,13 @@ public class BusinessentityaddressService{
 	public void delete(Businessentityaddress entity) {
 		businessentityaddressRepository.delete(entity);
 	}
+	
+	public void delete(Integer businessentityid, Integer addressid, Integer addresstypeid) {
+		BusinessentityaddressPK id = new BusinessentityaddressPK();
+		id.setBusinessentityid(businessentityid);
+		id.setAddressid(addressid);
+		id.setAddresstypeid(addresstypeid);
+		
+		businessentityaddressRepository.deleteById(id);
+	}
 }

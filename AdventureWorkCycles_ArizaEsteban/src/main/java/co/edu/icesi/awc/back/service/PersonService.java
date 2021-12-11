@@ -28,7 +28,7 @@ public class PersonService{
 	}
 
 	//Methods
-	//Main Methods---
+	//~Create
 	public Person save(Person entity) {
 		Person sPerson = null;
 		
@@ -55,6 +55,7 @@ public class PersonService{
 		return sPerson;
 	}
 	
+	//~Update
 	public Person update(Person entity) {
 		Person entityActual = null;
 		
@@ -67,19 +68,35 @@ public class PersonService{
 		
 		return entityActual;
 	}
-	//---
+	
+	//~Read
+	public Iterable<Person> findAll() {
+		return personRepository.findAll();
+	}
 	
 	public Optional<Person> findByPK(Integer id) {
 		return personRepository.findById(id);
 	}
 	
-	public Iterable<Person> findAll() {
-		return personRepository.findAll();
+	public Iterable<Person> findByTitle(String title){
+		return personRepository.findByTitle(title);
 	}
 	
+	public Iterable<Person> findByPersontype(String persontype){
+		return personRepository.findByPersontype(persontype);
+	}
+	
+	public Iterable<?> findBySpecialQuery(Timestamp start, Timestamp end){
+		return personRepository.specialQuery(start, end);
+	}
+	
+	//~Delete
 	public void delete(Person entity) {
 		personRepository.delete(entity);
-		
+	}
+	
+	public void delete(Integer id) {
+		personRepository.deleteById(id);
 	}
 	
 }

@@ -2,6 +2,7 @@ package co.edu.icesi.awc.back.service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class PersonphoneService{
 	}
 	
 	//Methods
-	//Main Methods
+	//~Create
 	public Personphone save(Personphone entity, String phonenumber, Integer businessentityid, Integer phonenumbertypeid) {
 		
 		Personphone sPersonphone = null;
@@ -63,6 +64,7 @@ public class PersonphoneService{
 		return sPersonphone;
 	}
 	
+	//~Update
 	public Personphone update(Personphone entity) {
 		Personphone entityActual = null;
 		
@@ -77,6 +79,11 @@ public class PersonphoneService{
 	}
 	//...
 	
+	//~Read
+	public Iterable<Personphone> findAll() {
+		return personphoneRepository.findAll();
+	}
+	
 	public Optional<Personphone> findByPK(Integer businessentityid, String phonenumber, Integer phonenumbertypeid) {
 		PersonphonePK id = new PersonphonePK();
 		id.setBusinessentityid(businessentityid);
@@ -86,12 +93,30 @@ public class PersonphoneService{
 		return personphoneRepository.findById(id);
 	}
 	
-	public Iterable<Personphone> findAll() {
-		return personphoneRepository.findAll();
+	public Iterable<Personphone> findByPrefix(String prefix) {
+		return personphoneRepository.findByPrefix(prefix);
 	}
 	
+	public Iterable<Personphone> findByPhonenumbertype(Integer phonenumbertypeid) {
+		return personphoneRepository.findByPhonenumbertype(phonenumbertypeid);
+	}
+	
+	public Iterable<Personphone> findBySpecialQuery() {
+		return personphoneRepository.specialQuery();
+	}
+	
+	//~Delete
 	public void delete(Personphone entity) {
 		personphoneRepository.delete(entity);
 	}
 	
+	public void delete(Integer businessentityid, String phonenumber, Integer phonenumbertypeid) {
+		
+		PersonphonePK id = new PersonphonePK();
+		id.setBusinessentityid(businessentityid);
+		id.setPhonenumber(phonenumber);
+		id.setPhonenumbertypeid(phonenumbertypeid);
+		
+		personphoneRepository.deleteById(id);
+	}
 }
