@@ -19,23 +19,22 @@ import co.edu.icesi.awc.back.repository.AddressRepository;
 import co.edu.icesi.awc.back.repository.AddresstypeRepository;
 import co.edu.icesi.awc.back.repository.BusinessentityRepository;
 import co.edu.icesi.awc.back.service.BusinessentityaddressService;
+import co.edu.icesi.awc.front.businessdelegate.BusinessDelegate;
 
 @Controller
 @RequestMapping("/businessentityaddress")
 public class BusinessentityaddressController {
 	//Attribute
-	private BusinessentityaddressService businessentityaddressService;
+	private BusinessDelegate businessDelegate;
 	
 	private BusinessentityRepository businessentityRepository;
-	private AddressRepository addressRepository;
 	private AddresstypeRepository addresstypeRepository;
 	
 	//Constructor
 	@Autowired
-	public BusinessentityaddressController(BusinessentityaddressService businessentityaddressService, BusinessentityRepository businessentityRepository, AddressRepository addressRepository, AddresstypeRepository addresstypeRepository) {
-		this.businessentityaddressService = businessentityaddressService;
+	public BusinessentityaddressController(BusinessDelegate businessDelegate, BusinessentityRepository businessentityRepository, AddresstypeRepository addresstypeRepository) {
+		this.businessDelegate = businessDelegate;
 		this.businessentityRepository =businessentityRepository;
-		this.addressRepository = addressRepository;
 		this.addresstypeRepository = addresstypeRepository;
 	}
 	
@@ -43,7 +42,7 @@ public class BusinessentityaddressController {
 	//Index
 	@GetMapping("/")
 	public String indexGet(Model model) {
-		model.addAttribute("businessentityaddresses", businessentityaddressService.findAll());
+		model.addAttribute("businessentityaddresses", businessDelegate.businessentityaddressFindAll());
 		return "businessentityaddress/index";
 	}
 	
@@ -52,7 +51,7 @@ public class BusinessentityaddressController {
 	public String addGet(Model model) {
 		model.addAttribute("businessentityaddress", new Businessentityaddress());
 		model.addAttribute("businessentities", businessentityRepository.findAll());
-		model.addAttribute("addresses", addressRepository.findAll());
+		model.addAttribute("addresses", businessDelegate.addressFindAll());
 		model.addAttribute("addresstypes", addresstypeRepository.findAll());
 		return "businessentityaddress/add";
 	}
@@ -63,11 +62,11 @@ public class BusinessentityaddressController {
 		
 		if (!action.equals("Cancel")) {
 			if(!bindingResult.hasErrors()) {
-				businessentityaddressService.save(businessentityaddress, businessentityaddress.getAddress().getAddressid(), businessentityaddress.getBusinessentity().getBusinessentityid(), businessentityaddress.getAddresstype().getAddresstypeid());//Cambiar
+				businessDelegate.businessentityaddressSave(businessentityaddress);
 			}
 			else {
 				model.addAttribute("businessentities", businessentityRepository.findAll());
-				model.addAttribute("addresses", addressRepository.findAll());
+				model.addAttribute("addresses", businessDelegate.addressFindAll());
 				model.addAttribute("addresstypes", addresstypeRepository.findAll());
 				dir = "businessentityaddress/add";
 			}
@@ -79,12 +78,10 @@ public class BusinessentityaddressController {
 	//Edit
 	@GetMapping("/edit/{id1}_{id2}_{id3}")
 	public String editGet(@PathVariable("id1") Integer businessentityid, @PathVariable("id2") Integer addressid, @PathVariable("id3") Integer addresstypeid, Model model) {
-		Optional<Businessentityaddress> businessentityaddress = businessentityaddressService.findByPK(businessentityid, addressid, addresstypeid);
-		if (businessentityaddress.isEmpty())
-			throw new IllegalArgumentException("Invalid address Id:(" + businessentityid+","+addressid+","+addresstypeid+")");
-		model.addAttribute("businessentityaddress", businessentityaddress.get());
+		Businessentityaddress businessentityaddress = businessDelegate.businessentityaddressFindById(businessentityid, addressid, addresstypeid);
+		model.addAttribute("businessentityaddress", businessentityaddress);
 		model.addAttribute("businessentities", businessentityRepository.findAll());
-		model.addAttribute("addresses", addressRepository.findAll());
+		model.addAttribute("addresses", businessDelegate.addressFindAll());
 		model.addAttribute("addresstypes", addresstypeRepository.findAll());
 		return "businessentityaddress/edit";
 	}
@@ -95,7 +92,7 @@ public class BusinessentityaddressController {
 		
 		if (action != null && !action.equals("Cancel")) {
 			if(!bindingResult.hasErrors()) {
-				businessentityaddressService.update(businessentityaddress);
+				businessDelegate.businessentityaddressUpdate(businessentityaddress);
 			}
 			else {
 				dir = "businessentityaddress/edit";

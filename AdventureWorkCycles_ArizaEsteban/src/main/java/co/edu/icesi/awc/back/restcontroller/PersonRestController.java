@@ -43,7 +43,7 @@ public class PersonRestController {
 	}
 	
 	//~Read
-	@GetMapping("/get/all")
+	@GetMapping
 	public Iterable<Person> getAll(){
 		return personService.findAll();
 	}

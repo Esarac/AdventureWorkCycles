@@ -17,19 +17,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 import co.edu.icesi.awc.back.model.person.Address;
 import co.edu.icesi.awc.back.repository.StateprovinceRepository;
 import co.edu.icesi.awc.back.service.AddressService;
+import co.edu.icesi.awc.front.businessdelegate.BusinessDelegate;
 
 @Controller
 @RequestMapping("/address")
 public class AddressController {
 	//Attribute
-	private AddressService addressService;
+	private BusinessDelegate businessDelegate;
 	
 	private StateprovinceRepository stateprovinceRepository;
 	
 	//Constructor
 	@Autowired
-	public AddressController(AddressService addressService, StateprovinceRepository stateprovinceRepository) {
-		this.addressService = addressService;
+	public AddressController(BusinessDelegate businessDelegate, StateprovinceRepository stateprovinceRepository) {
+		this.businessDelegate = businessDelegate;
 		this.stateprovinceRepository = stateprovinceRepository;
 	}
 	
@@ -37,7 +38,7 @@ public class AddressController {
 	//Index
 	@GetMapping("/")
 	public String indexGet(Model model) {
-		model.addAttribute("addresses", addressService.findAll());
+		model.addAttribute("addresses", businessDelegate.addressFindAll());
 		return "address/index";
 	}
 	
@@ -55,7 +56,7 @@ public class AddressController {
 		
 		if (!action.equals("Cancel")) {
 			if(!bindingResult.hasErrors()) {
-				addressService.save(address, address.getStateprovince().getStateprovinceid());//Cambiar
+				businessDelegate.addressSave(address);
 			}
 			else {
 				model.addAttribute("stateprovinces", stateprovinceRepository.findAll());
@@ -69,10 +70,8 @@ public class AddressController {
 	//Edit
 	@GetMapping("/edit/{id}")
 	public String editGet(@PathVariable("id") Integer id, Model model) {
-		Optional<Address> address = addressService.findByPK(id);
-		if (address.isEmpty())
-			throw new IllegalArgumentException("Invalid address Id:" + id);
-		model.addAttribute("address", address.get());
+		Address address = businessDelegate.addressFindById(id);
+		model.addAttribute("address", address);
 		model.addAttribute("stateprovinces", stateprovinceRepository.findAll());
 		return "address/edit";
 	}
@@ -83,7 +82,7 @@ public class AddressController {
 		
 		if (action != null && !action.equals("Cancel")) {
 			if(!bindingResult.hasErrors()) {
-				addressService.update(address, address.getStateprovince().getStateprovinceid());
+				businessDelegate.addressUpdate(address);
 			}
 			else {
 				dir = "address/edit";

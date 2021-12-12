@@ -32,18 +32,18 @@ public class AddressRestController {
 	//Methods
 	//~Create
 	@PostMapping
-	public Address add(@RequestBody Address address, @PathVariable Integer stateprovinceid) {
-		return addressService.save(address, stateprovinceid);
+	public Address add(@RequestBody Address address) {
+		return addressService.save(address, address.getStateprovince().getStateprovinceid());
 	}
 	
 	//~Update
 	@PutMapping
-	public Address update(@RequestBody Address address, Integer stateprovinceid) {
-		return addressService.update(address, stateprovinceid);
+	public Address update(@RequestBody Address address) {
+		return addressService.update(address, address.getStateprovince().getStateprovinceid());
 	}
 	
 	//~Read
-	@GetMapping("/get/all")
+	@GetMapping
 	public Iterable<Address> getAll() {
 		return addressService.findAll();
 	}

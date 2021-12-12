@@ -16,24 +16,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.awc.back.model.person.Person;
 import co.edu.icesi.awc.back.service.PersonService;
+import co.edu.icesi.awc.front.businessdelegate.BusinessDelegate;
 
 @Controller
 @RequestMapping("/person")
 public class PersonController {
 	//Attribute
-	private PersonService personService;
+	private BusinessDelegate businessDelegate;
 	
 	//Constructor
 	@Autowired
-	public PersonController(PersonService personService) {
-		this.personService = personService;
+	public PersonController(BusinessDelegate businessDelegate) {
+		this.businessDelegate = businessDelegate;
 	}
 	
 	//~Mapping
 	//Index
 	@GetMapping("/")
 	public String indexGet(Model model) {
-		model.addAttribute("persons", personService.findAll());
+		model.addAttribute("persons", businessDelegate.personFindAll());
 		return "person/index";
 	}
 	
@@ -50,7 +51,7 @@ public class PersonController {
 		
 		if (!action.equals("Cancel")) {
 			if(!bindingResult.hasErrors()) {
-				personService.save(person);
+				businessDelegate.personSave(person);
 			}
 			else {
 				dir = "person/add";
@@ -63,10 +64,8 @@ public class PersonController {
 	//Edit
 	@GetMapping("/edit/{id}")
 	public String editGet(@PathVariable("id") Integer id, Model model) {
-		Optional<Person> person = personService.findByPK(id);
-		if (person.isEmpty())
-			throw new IllegalArgumentException("Invalid person Id:" + id);
-		model.addAttribute("person", person.get());
+		Person person = businessDelegate.personFindById(id);
+		model.addAttribute("person", person);
 		return "person/edit";
 	}
 
@@ -76,7 +75,7 @@ public class PersonController {
 		
 		if (action != null && !action.equals("Cancel")) {
 			if(!bindingResult.hasErrors()) {
-				personService.update(person);
+				businessDelegate.personUpdate(person);
 			}
 			else {
 				dir = "person/edit";

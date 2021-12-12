@@ -28,7 +28,7 @@ public class BusinessentityaddressRestController {
 	//~Create
 	@PostMapping
 	public Businessentityaddress add(Businessentityaddress entity) {
-		return busentaddressService.save(entity, null, null, null);//[Change]
+		return busentaddressService.save(entity, entity.getBusinessentity().getBusinessentityid(), entity.getAddress().getAddressid(), entity.getAddresstype().getAddresstypeid());
 	}
 	
 	//~Update
