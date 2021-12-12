@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 /**
  * The persistent class for the customer database table.
@@ -22,14 +24,16 @@ import javax.persistence.SequenceGenerator;
 @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
 public class Customer implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@SequenceGenerator(name = "CUSTOMER_CUSTOMERID_GENERATOR", allocationSize = 1, sequenceName = "CUSTOMER_SEQ")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CUSTOMER_CUSTOMERID_GENERATOR")
 	private Integer customerid;
 
+	@PastOrPresent
 	private Timestamp modifieddate;
 
+	@NotNull
 	private Integer personid;
 
 	private Integer rowguid;

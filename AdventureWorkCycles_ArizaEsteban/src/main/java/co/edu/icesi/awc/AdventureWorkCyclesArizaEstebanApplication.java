@@ -12,12 +12,16 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import co.edu.icesi.awc.back.dao.AddressDAO;
+import co.edu.icesi.awc.back.dao.CustomerDAO;
 import co.edu.icesi.awc.back.dao.PersonDAO;
+import co.edu.icesi.awc.back.dao.StoreDAO;
 import co.edu.icesi.awc.back.model.person.Address;
 import co.edu.icesi.awc.back.model.person.Addresstype;
 import co.edu.icesi.awc.back.model.person.Person;
 import co.edu.icesi.awc.back.model.person.Phonenumbertype;
 import co.edu.icesi.awc.back.model.person.Stateprovince;
+import co.edu.icesi.awc.back.model.sales.Customer;
+import co.edu.icesi.awc.back.model.sales.Store;
 import co.edu.icesi.awc.back.repository.AddressRepository;
 import co.edu.icesi.awc.back.repository.AddresstypeRepository;
 import co.edu.icesi.awc.back.repository.PhonenumbertypeRepository;
@@ -79,6 +83,19 @@ public class AdventureWorkCyclesArizaEstebanApplication {
 		PhonenumbertypeRepository pr = c.getBean(PhonenumbertypeRepository.class);
 		Phonenumbertype phonenumbertype1 = new Phonenumbertype();
 		pr.save(phonenumbertype1);
+		
+		//~Store
+		StoreDAO str = c.getBean(StoreDAO.class);
+		Store store = new Store();
+		store.setDemographics("demo");
+		store.setName("name");
+		str.save(store);
+		
+		//~Customer
+		CustomerDAO cr = c.getBean(CustomerDAO.class);
+		Customer customer = new Customer();
+		customer.setPersonid(1);
+		cr.save(customer);
 		//...
 	}
 
