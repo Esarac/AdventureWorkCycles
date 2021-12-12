@@ -2,6 +2,7 @@ package co.edu.icesi.awc.back.service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +67,10 @@ public class AddressService{
 	
 	public Optional<Address> findByPK(Integer id) {
 		return addressRepository.findById(id);
+	}
+	
+	public Iterable<Address> findByModifieddate(Timestamp modifieddate) {
+		return addressRepository.findByModifieddate(modifieddate);
 	}
 	
 	public Iterable<Address> findAll() {
