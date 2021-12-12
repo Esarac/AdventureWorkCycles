@@ -1,11 +1,9 @@
 package co.edu.icesi.awc.front.businessdelegate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -16,30 +14,27 @@ import org.springframework.web.client.RestTemplate;
 import co.edu.icesi.awc.back.model.person.Address;
 import co.edu.icesi.awc.back.model.person.Businessentityaddress;
 import co.edu.icesi.awc.back.model.person.Person;
-import co.edu.icesi.awc.back.restcontroller.PersonRestController;
+import co.edu.icesi.awc.back.model.person.Personphone;
+import lombok.Getter;
+import lombok.Setter;
 
 @Component
 public class BusinessDelegate {
 	
 	//Constants
-	private final static String URL = "http://localhost:8081/api";
-	private final static String PERSON_URL = URL + "/person/";
-	private final static String ADDRESS_URL = URL + "/address/";
-	private final static String BUSINESSENTITYADDRESS_URL = URL + "/businessentityaddress/";
-	private final static String PERSONPHONE_URL = URL + "/personphone/";
+	public final static String URL = "http://localhost:8081/api";
+	public final static String PERSON_URL = URL + "/person/";
+	public final static String ADDRESS_URL = URL + "/address/";
+	public final static String BUSINESSENTITYADDRESS_URL = URL + "/businessentityaddress/";
+	public final static String PERSONPHONE_URL = URL + "/personphone/";
 	
 	//Attributes
+	@Getter @Setter
 	private RestTemplate restTemplate;
 	
 	//Constructor
 	public BusinessDelegate() {
 		this.restTemplate = new RestTemplate();
-		
-//		List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
-//		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-//		converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
-//		messageConverters.add(converter);
-//		restTemplate.setMessageConverters(messageConverters);
 		
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -51,31 +46,27 @@ public class BusinessDelegate {
 	//Methods
 	//~Person
 	public Iterable<Person> personFindAll(){
-//		Person[] array = restTemplate.getForObject(PERSON_URL, Person[].class);
-//		return Arrays.asList(array);
-		return personRestController.getAll();
+		Iterable<Person> array = restTemplate.getForObject(PERSON_URL, Iterable.class);
+		return array;
 	}
 	
 	public Person personSave(Person person) {
-//		HttpEntity<Person> request = new HttpEntity<Person>(person);
-//		return restTemplate.postForObject(PERSON_URL, request, Person.class);
-		return personRestController.add(person);
+		HttpEntity<Person> request = new HttpEntity<Person>(person);
+		return restTemplate.postForObject(PERSON_URL, request, Person.class);
 	}
 	
 	public Person personFindById(Integer id) {
-//		return restTemplate.getForObject(PERSON_URL+id, Person.class);
-		return personRestController.getById(id);
+		return restTemplate.getForObject(PERSON_URL+id, Person.class);
 	}
 	
 	public void personUpdate(Person person) {
-//		restTemplate.put(PERSON_URL, person, Person.class);
-		personRestController.update(person);
+		restTemplate.put(PERSON_URL, person, Person.class);
 	}
 	
 	//~Address
 	public Iterable<Address> addressFindAll() {
-		Address[] array = restTemplate.getForObject(ADDRESS_URL, Address[].class);
-		return Arrays.asList(array);
+		Iterable<Address> array= restTemplate.getForObject(ADDRESS_URL, Iterable.class);
+		return array;
 	}
 	
 	public Address addressSave(Address address) {
@@ -93,8 +84,8 @@ public class BusinessDelegate {
 	
 	//~Business Entity Address
 	public Iterable<Businessentityaddress> businessentityaddressFindAll() {
-		Businessentityaddress[] array = restTemplate.getForObject(BUSINESSENTITYADDRESS_URL, Businessentityaddress[].class);
-		return Arrays.asList(array);
+		Iterable<Businessentityaddress> array = restTemplate.getForObject(BUSINESSENTITYADDRESS_URL, Iterable.class);
+		return array;
 	}
 	
 	public Businessentityaddress businessentityaddressSave(Businessentityaddress businessentityaddress) {
@@ -111,9 +102,22 @@ public class BusinessDelegate {
 	}
 	
 	//~Person Phone
+	public Iterable<Personphone> personphoneFindAll() {
+		Iterable<Personphone> array = restTemplate.getForObject(PERSONPHONE_URL, Iterable.class);
+		return array;
+	}
 	
+	public Personphone personphoneSave(Personphone personphone) {
+		HttpEntity<Personphone> request = new HttpEntity<Personphone>(personphone);
+		return restTemplate.postForObject(PERSONPHONE_URL, request, Personphone.class);
+	}
 	
-	//Shhhhhhh!
-	@Autowired
-	PersonRestController personRestController;
+	public Personphone personphoneFindById(Integer id1, String id2, Integer id3) {
+		return restTemplate.getForObject(PERSONPHONE_URL+id1+"_"+id2+"_"+id3, Personphone.class);
+	}
+	
+	public void personphoneUpdate(Personphone personphone) {
+		restTemplate.put(PERSONPHONE_URL, personphone, Personphone.class);
+	}
+	
 }

@@ -1,7 +1,5 @@
 package co.edu.icesi.awc.front.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,20 +14,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.awc.back.model.person.Address;
 import co.edu.icesi.awc.back.repository.StateprovinceRepository;
-import co.edu.icesi.awc.back.service.AddressService;
-import co.edu.icesi.awc.front.businessdelegate.BusinessDelegate;
+import co.edu.icesi.awc.front.businessdelegate.BusinessDelegateInterface;
 
 @Controller
 @RequestMapping("/address")
 public class AddressController {
 	//Attribute
-	private BusinessDelegate businessDelegate;
+	private BusinessDelegateInterface businessDelegate;
 	
 	private StateprovinceRepository stateprovinceRepository;
 	
 	//Constructor
 	@Autowired
-	public AddressController(BusinessDelegate businessDelegate, StateprovinceRepository stateprovinceRepository) {
+	public AddressController(BusinessDelegateInterface businessDelegate, StateprovinceRepository stateprovinceRepository) {
 		this.businessDelegate = businessDelegate;
 		this.stateprovinceRepository = stateprovinceRepository;
 	}

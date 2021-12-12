@@ -1,19 +1,10 @@
 package co.edu.icesi.awc;
 
-import java.sql.Timestamp;
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.Bean;
 
-import co.edu.icesi.awc.back.dao.AddressDAO;
 import co.edu.icesi.awc.back.dao.CustomerDAO;
-import co.edu.icesi.awc.back.dao.PersonDAO;
 import co.edu.icesi.awc.back.dao.StoreDAO;
 import co.edu.icesi.awc.back.model.person.Address;
 import co.edu.icesi.awc.back.model.person.Addresstype;
@@ -22,7 +13,6 @@ import co.edu.icesi.awc.back.model.person.Phonenumbertype;
 import co.edu.icesi.awc.back.model.person.Stateprovince;
 import co.edu.icesi.awc.back.model.sales.Customer;
 import co.edu.icesi.awc.back.model.sales.Store;
-import co.edu.icesi.awc.back.repository.AddressRepository;
 import co.edu.icesi.awc.back.repository.AddresstypeRepository;
 import co.edu.icesi.awc.back.repository.PhonenumbertypeRepository;
 import co.edu.icesi.awc.back.repository.StateprovinceRepository;

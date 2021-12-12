@@ -15,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * The persistent class for the address database table.
  *
@@ -49,10 +51,12 @@ public class Address implements Serializable {
 	// bi-directional many-to-one association to Stateprovince
 	@ManyToOne
 	@JoinColumn(name = "stateprovinceid")
+	@JsonIgnore
 	private Stateprovince stateprovince;
 
 	// bi-directional many-to-one association to Businessentityaddress
 	@OneToMany(mappedBy = "address")
+	@JsonIgnore
 	private List<Businessentityaddress> businessentityaddresses;
 
 	public Address() {

@@ -23,6 +23,11 @@
 					<h2 class="my-5">Edit Customer</h2>
 					<form action="#" th:action="@{/customer/edit/}+${customer.customerid}" th:object="${customer}" method="post">
 						<div>
+							<div class="form-group" hidden>
+								<label>id</label>
+								<input class="form-control" type="number" placeholder="customerid" th:field="*{customerid}" readonly/>
+								<span th:if="${#fields.hasErrors('customerid')}" th:errors="*{customerid}" class="text-danger"></span>
+							</div>
 							<div class="form-group">
 								<label>personid</label>
 								<select class="form-control" th:field="*{personid}">

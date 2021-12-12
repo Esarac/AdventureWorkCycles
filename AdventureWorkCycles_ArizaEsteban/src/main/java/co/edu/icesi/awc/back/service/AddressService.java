@@ -2,7 +2,6 @@ package co.edu.icesi.awc.back.service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Service;
 import co.edu.icesi.awc.back.dao.AddressDAO;
 import co.edu.icesi.awc.back.model.person.Address;
 import co.edu.icesi.awc.back.model.person.Stateprovince;
-import co.edu.icesi.awc.back.repository.AddressRepository;
 import co.edu.icesi.awc.back.repository.StateprovinceRepository;
 
 @Service

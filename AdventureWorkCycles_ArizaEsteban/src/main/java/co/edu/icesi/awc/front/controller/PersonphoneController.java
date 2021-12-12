@@ -1,7 +1,5 @@
 package co.edu.icesi.awc.front.controller;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,23 +13,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.awc.back.model.person.Personphone;
 import co.edu.icesi.awc.back.model.person.PersonphonePK;
-import co.edu.icesi.awc.back.repository.PersonRepository;
 import co.edu.icesi.awc.back.repository.PhonenumbertypeRepository;
-import co.edu.icesi.awc.back.service.PersonphoneService;
+import co.edu.icesi.awc.front.businessdelegate.BusinessDelegateInterface;
 
 @Controller
 @RequestMapping("/personphone")
 public class PersonphoneController {
 	//Attributes
-	private PersonphoneService personphoneService;
+	private BusinessDelegateInterface businessDelegate;
 	
-	private PersonRepository personRepository;
 	private PhonenumbertypeRepository phonenumbertypeRepository;
 	
 	//Constructor
-	public PersonphoneController(PersonphoneService personphoneService, PersonRepository personRepository, PhonenumbertypeRepository phonenumbertypeRepository) {
-		this.personphoneService = personphoneService;
-		this.personRepository = personRepository;
+	public PersonphoneController(BusinessDelegateInterface businessDelegate, PhonenumbertypeRepository phonenumbertypeRepository) {
+		this.businessDelegate = businessDelegate;
 		this.phonenumbertypeRepository =phonenumbertypeRepository;
 	}
 	
@@ -39,7 +34,7 @@ public class PersonphoneController {
 	//Index
 	@GetMapping("/")
 	public String indexGet(Model model) {
-		model.addAttribute("personphones", personphoneService.findAll());
+		model.addAttribute("personphones", businessDelegate.personphoneFindAll());
 		return "personphone/index";
 	}
 	
@@ -50,7 +45,7 @@ public class PersonphoneController {
 		newPersonphone.setId(new PersonphonePK());
 		
 		model.addAttribute("personphone", newPersonphone);
-		model.addAttribute("persons", personRepository.findAll());
+		model.addAttribute("persons", businessDelegate.personFindAll());
 		model.addAttribute("phonenumbertypes", phonenumbertypeRepository.findAll());
 		return "personphone/add";
 	}
@@ -61,10 +56,10 @@ public class PersonphoneController {
 		
 		if (!action.equals("Cancel")) {
 			if(!bindingResult.hasErrors()) {
-				personphoneService.save(personphone, personphone.getId().getPhonenumber(), personphone.getPerson().getBusinessentityid(), personphone.getPhonenumbertype().getPhonenumbertypeid());
+				businessDelegate.personphoneSave(personphone);
 			}
 			else {
-				model.addAttribute("persons", personRepository.findAll());
+				model.addAttribute("persons", businessDelegate.personFindAll());
 				model.addAttribute("phonenumbertypes", phonenumbertypeRepository.findAll());
 				dir = "personphone/add";
 			}
@@ -76,10 +71,8 @@ public class PersonphoneController {
 	//Edit
 	@GetMapping("/edit/{id1}_{id2}_{id3}")
 	public String editGet(@PathVariable("id1") Integer businessentityid, @PathVariable("id2") String phonenumber, @PathVariable("id3") Integer phonenumbertypeid, Model model) {
-		Optional<Personphone> personphone = personphoneService.findByPK(businessentityid, phonenumber, phonenumbertypeid);
-		if (personphone.isEmpty())
-			throw new IllegalArgumentException("Invalid address Id:(" + businessentityid+","+phonenumber+","+phonenumbertypeid+")");
-		model.addAttribute("personphone", personphone.get());
+		Personphone personphone = businessDelegate.personphoneFindById(businessentityid, phonenumber, phonenumbertypeid);
+		model.addAttribute("personphone", personphone);
 		return "personphone/edit";
 	}
 
@@ -89,7 +82,7 @@ public class PersonphoneController {
 		
 		if (action != null && !action.equals("Cancel")) {
 			if(!bindingResult.hasErrors()) {
-				personphoneService.update(personphone);
+				businessDelegate.personphoneUpdate(personphone);
 			}
 			else {
 				dir = "personphone/edit";

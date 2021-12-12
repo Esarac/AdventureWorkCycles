@@ -1,9 +1,7 @@
 package co.edu.icesi.awc.back.security;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.hibernate.internal.build.AllowSysOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;

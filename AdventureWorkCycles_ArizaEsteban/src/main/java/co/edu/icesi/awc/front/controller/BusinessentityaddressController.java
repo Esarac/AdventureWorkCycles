@@ -1,7 +1,5 @@
 package co.edu.icesi.awc.front.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,24 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.awc.back.model.person.Businessentityaddress;
-import co.edu.icesi.awc.back.repository.AddressRepository;
 import co.edu.icesi.awc.back.repository.AddresstypeRepository;
 import co.edu.icesi.awc.back.repository.BusinessentityRepository;
-import co.edu.icesi.awc.back.service.BusinessentityaddressService;
-import co.edu.icesi.awc.front.businessdelegate.BusinessDelegate;
+import co.edu.icesi.awc.front.businessdelegate.BusinessDelegateInterface;
 
 @Controller
 @RequestMapping("/businessentityaddress")
 public class BusinessentityaddressController {
 	//Attribute
-	private BusinessDelegate businessDelegate;
+	private BusinessDelegateInterface businessDelegate;
 	
 	private BusinessentityRepository businessentityRepository;
 	private AddresstypeRepository addresstypeRepository;
 	
 	//Constructor
 	@Autowired
-	public BusinessentityaddressController(BusinessDelegate businessDelegate, BusinessentityRepository businessentityRepository, AddresstypeRepository addresstypeRepository) {
+	public BusinessentityaddressController(BusinessDelegateInterface businessDelegate, BusinessentityRepository businessentityRepository, AddresstypeRepository addresstypeRepository) {
 		this.businessDelegate = businessDelegate;
 		this.businessentityRepository =businessentityRepository;
 		this.addresstypeRepository = addresstypeRepository;

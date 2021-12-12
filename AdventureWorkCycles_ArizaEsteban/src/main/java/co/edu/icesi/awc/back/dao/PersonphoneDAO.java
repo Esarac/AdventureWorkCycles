@@ -1,9 +1,7 @@
 package co.edu.icesi.awc.back.dao;
 
-import java.sql.Timestamp;
 import java.util.List;
 
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import org.springframework.stereotype.Repository;

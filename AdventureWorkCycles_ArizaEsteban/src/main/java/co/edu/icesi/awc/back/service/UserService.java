@@ -5,9 +5,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.edu.icesi.awc.back.model.person.Person;
-import co.edu.icesi.awc.back.repository.BusinessentityRepository;
-import co.edu.icesi.awc.back.repository.PersonRepository;
 import co.edu.icesi.awc.back.security.UserApp;
 import co.edu.icesi.awc.back.security.UserRepository;
 

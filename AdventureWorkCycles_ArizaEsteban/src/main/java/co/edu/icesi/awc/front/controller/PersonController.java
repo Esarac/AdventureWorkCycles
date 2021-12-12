@@ -1,7 +1,5 @@
 package co.edu.icesi.awc.front.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,18 +13,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import co.edu.icesi.awc.back.model.person.Person;
-import co.edu.icesi.awc.back.service.PersonService;
-import co.edu.icesi.awc.front.businessdelegate.BusinessDelegate;
+import co.edu.icesi.awc.front.businessdelegate.BusinessDelegateInterface;
 
 @Controller
 @RequestMapping("/person")
 public class PersonController {
 	//Attribute
-	private BusinessDelegate businessDelegate;
+	private BusinessDelegateInterface businessDelegate;
 	
 	//Constructor
 	@Autowired
-	public PersonController(BusinessDelegate businessDelegate) {
+	public PersonController(BusinessDelegateInterface businessDelegate) {
 		this.businessDelegate = businessDelegate;
 	}
 	

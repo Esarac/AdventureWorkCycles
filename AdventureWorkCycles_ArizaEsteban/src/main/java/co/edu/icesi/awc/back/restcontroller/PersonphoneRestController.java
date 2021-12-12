@@ -31,7 +31,7 @@ public class PersonphoneRestController {
 	//~Create
 	@PostMapping
 	public Personphone add(@RequestBody Personphone personphone) {
-		return personphoneService.save(personphone, null, null, null);//[Change]
+		return personphoneService.save(personphone, personphone.getId().getPhonenumber(), personphone.getPerson().getBusinessentityid(), personphone.getPhonenumbertype().getPhonenumbertypeid());//[Change]
 	}
 	
 	//~Update
@@ -41,7 +41,7 @@ public class PersonphoneRestController {
 	}
 	
 	//~Read
-	@GetMapping("/get/all")
+	@GetMapping
 	public Iterable<Personphone> getAll(){
 		return personphoneService.findAll();
 	}

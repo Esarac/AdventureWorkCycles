@@ -15,7 +15,6 @@ import co.edu.icesi.awc.back.model.person.BusinessentityaddressPK;
 import co.edu.icesi.awc.back.repository.AddressRepository;
 import co.edu.icesi.awc.back.repository.AddresstypeRepository;
 import co.edu.icesi.awc.back.repository.BusinessentityRepository;
-import co.edu.icesi.awc.back.repository.BusinessentityaddressRepository;
 
 @Service
 public class BusinessentityaddressService{

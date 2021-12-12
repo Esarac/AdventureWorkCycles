@@ -38,7 +38,7 @@ public class BusinessentityaddressRestController {
 	}
 	
 	//~Read
-	@GetMapping("/get/all")
+	@GetMapping
 	public Iterable<Businessentityaddress> getAll() {
 		return busentaddressService.findAll();
 	}

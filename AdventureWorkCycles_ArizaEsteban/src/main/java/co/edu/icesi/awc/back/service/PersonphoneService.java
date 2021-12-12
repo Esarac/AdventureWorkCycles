@@ -2,11 +2,9 @@ package co.edu.icesi.awc.back.service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import co.edu.icesi.awc.back.dao.PersonphoneDAO;
 import co.edu.icesi.awc.back.model.person.Person;
@@ -14,7 +12,6 @@ import co.edu.icesi.awc.back.model.person.Personphone;
 import co.edu.icesi.awc.back.model.person.PersonphonePK;
 import co.edu.icesi.awc.back.model.person.Phonenumbertype;
 import co.edu.icesi.awc.back.repository.PersonRepository;
-import co.edu.icesi.awc.back.repository.PersonphoneRepository;
 import co.edu.icesi.awc.back.repository.PhonenumbertypeRepository;
 
 @Service

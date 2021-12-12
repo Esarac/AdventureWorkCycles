@@ -65,10 +65,10 @@ public class StoreController {
         return "store/edit";
     }
 
-    @PostMapping("edit/{id}")
+    @PostMapping("/edit/{id}")
     public String editPost(@Validated @ModelAttribute Store store, BindingResult bindingResult,  @PathVariable("id") Integer id, @RequestParam(value = "action", required = true) String action) {
         String dir = "redirect:/store/";
-        
+       
         if(action != null && !action.equals("Cancel")) {
             if(!bindingResult.hasErrors()) {
                 storeService.save(store);

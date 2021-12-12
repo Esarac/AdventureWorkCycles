@@ -23,6 +23,11 @@
 					<h2 class="my-5">Edit Store</h2>
 					<form action="#" th:action="@{/store/edit/}+${store.businessentityid}" th:object="${store}" method="post">
 						<div>
+							<div class="form-group" hidden>
+								<label>id</label>
+								<input class="form-control" type="number" placeholder="businessentityid" th:field="*{businessentityid}" readonly/>
+								<span th:if="${#fields.hasErrors('businessentityid')}" th:errors="*{businessentityid}" class="text-danger"></span>
+							</div>
 							<div class="form-group">
 								<label>demographics</label>
 								<input class="form-control" type="text" placeholder="demographics" th:field="*{demographics}" />
