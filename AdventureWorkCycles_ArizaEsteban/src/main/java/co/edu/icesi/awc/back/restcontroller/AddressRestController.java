@@ -48,7 +48,7 @@ public class AddressRestController {
 		return addressService.findAll();
 	}
 	
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public Address getById(@PathVariable("id") Integer addressid) {
 		return addressService.findByPK(addressid).orElseThrow(() -> new IllegalArgumentException("Invalid id"));
 	}
