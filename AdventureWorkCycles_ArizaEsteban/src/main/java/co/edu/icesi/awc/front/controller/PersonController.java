@@ -1,6 +1,10 @@
 package co.edu.icesi.awc.front.controller;
 
+import java.sql.Timestamp;
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -11,7 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import co.edu.icesi.awc.back.model.person.Person;
 import co.edu.icesi.awc.front.businessdelegate.BusinessDelegateInterface;
 
@@ -81,6 +84,14 @@ public class PersonController {
 		}
 		
 		return dir;
+	}
+
+	//SpecialQuery
+	@GetMapping("/query")
+	public String queryGet(Model model, @RequestParam("from") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate from, @RequestParam("to") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate to) {
+		model.addAttribute("persons", businessDelegate.personFindAll());
+		model.addAttribute("personsQuery", businessDelegate.specialQuery(Timestamp.valueOf(from.atStartOfDay()), Timestamp.valueOf(to.atStartOfDay())));
+		return "person/index";
 	}
 	//...
 }

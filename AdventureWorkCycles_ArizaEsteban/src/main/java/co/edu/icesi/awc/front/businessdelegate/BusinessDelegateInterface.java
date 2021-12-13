@@ -1,5 +1,7 @@
 package co.edu.icesi.awc.front.businessdelegate;
 
+import java.sql.Timestamp;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -27,6 +29,10 @@ public class BusinessDelegateInterface {
 		
 		public Person personFindById(Integer id) {
 			return restTemplate.getById(id);
+		}
+
+		public Iterable<?> specialQuery(Timestamp start, Timestamp end) {
+			return restTemplate.getBySpecialQuery(start, end);
 		}
 		
 		public void personUpdate(Person person) {
