@@ -91,5 +91,13 @@ public class PersonphoneController {
 		
 		return dir;
 	}
+	
+	//SpecialQuery
+	@GetMapping("/query")
+	public String queryGet(Model model) {
+		model.addAttribute("personphones", businessDelegate.personphoneFindAll());
+		model.addAttribute("personphonesQuery", businessDelegate.specialQuery());
+		return "personphone/index";
+	}
 	//...
 }

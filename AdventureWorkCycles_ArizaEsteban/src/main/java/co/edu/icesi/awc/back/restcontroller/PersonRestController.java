@@ -2,6 +2,7 @@ package co.edu.icesi.awc.back.restcontroller;
 
 import java.sql.Timestamp;
 
+import org.javatuples.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,7 +65,7 @@ public class PersonRestController {
 	}
 	
 	@GetMapping("/get/specialquery")
-	public Iterable<?> getBySpecialQuery(@RequestParam("start") Timestamp start, @RequestParam("end") Timestamp end){
+	public Iterable<Pair<Person,Long>> getBySpecialQuery(@RequestParam("start") Timestamp start, @RequestParam("end") Timestamp end){
 		return personService.findBySpecialQuery(start, end);
 	}
 	

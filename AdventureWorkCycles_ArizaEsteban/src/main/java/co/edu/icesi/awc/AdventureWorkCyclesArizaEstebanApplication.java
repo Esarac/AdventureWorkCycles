@@ -12,6 +12,7 @@ import co.edu.icesi.awc.back.dao.AddressDAO;
 import co.edu.icesi.awc.back.dao.BusinessentityaddressDAO;
 import co.edu.icesi.awc.back.dao.CustomerDAO;
 import co.edu.icesi.awc.back.dao.PersonDAO;
+import co.edu.icesi.awc.back.dao.PersonphoneDAO;
 import co.edu.icesi.awc.back.dao.StoreDAO;
 import co.edu.icesi.awc.back.model.person.Address;
 import co.edu.icesi.awc.back.model.person.Addresstype;
@@ -19,6 +20,7 @@ import co.edu.icesi.awc.back.model.person.Businessentity;
 import co.edu.icesi.awc.back.model.person.Businessentityaddress;
 import co.edu.icesi.awc.back.model.person.BusinessentityaddressPK;
 import co.edu.icesi.awc.back.model.person.Person;
+import co.edu.icesi.awc.back.model.person.Personphone;
 import co.edu.icesi.awc.back.model.person.PersonphonePK;
 import co.edu.icesi.awc.back.model.person.Phonenumbertype;
 import co.edu.icesi.awc.back.model.sales.Customer;
@@ -64,6 +66,11 @@ public class AdventureWorkCyclesArizaEstebanApplication {
 		ar.save(new Addresstype());
 		ar.save(new Addresstype());
 		
+		//##Phonenumbertype
+		PhonenumbertypeRepository hr = c.getBean(PhonenumbertypeRepository.class);
+		hr.save(new Phonenumbertype());
+		hr.save(new Phonenumbertype());
+		
 		//~~Person
 		PersonDAO ps = c.getBean(PersonDAO.class);
 		
@@ -91,7 +98,7 @@ public class AdventureWorkCyclesArizaEstebanApplication {
 		person3.setPersontype("Alien");
 		ps.save(person3);
 		
-		//~~Address
+		//~~Address[Special Query 10-12]
 		AddressDAO as = c.getBean(AddressDAO.class);
 		
 		Address address1 = new Address();//:)
@@ -112,22 +119,20 @@ public class AdventureWorkCyclesArizaEstebanApplication {
 		address3.setAddressline1("Cl. 18 #122-135");
 		address3.setCity("Cali");
 		address3.setPostalcode("760008");
-		address3.setModifieddate(makeTimestamp(2021, 3, 11));
+		address3.setModifieddate(makeTimestamp(2021, 3, 10));
 		as.save(address3);
 		
 		Address address4 = new Address();
 		address4.setAddressline1("Cl. 5 #31-90");
 		address4.setCity("Pasto");
 		address4.setPostalcode("760009");
-		address4.setModifieddate(makeTimestamp(2021, 3, 12));
+		address4.setModifieddate(makeTimestamp(2021, 3, 11));
 		as.save(address4);
 		
 		//~~Businessentityaddress
 		//***
 		List<Address> addresses = as.findAll();
-		
 		List<Addresstype> addresstypes = (List<Addresstype>) ar.findAll();
-		
 		List<Businessentity> businessentities = (List<Businessentity>) br.findAll();
 		//***
 		
@@ -161,15 +166,43 @@ public class AdventureWorkCyclesArizaEstebanApplication {
 		businessentityaddress4.setId( factoryBusinessentityaddressPK(4,3,3) );
 		bs.save(businessentityaddress4);
 		
-		//~Addresstype
-		AddresstypeRepository tr = c.getBean(AddresstypeRepository.class);
-		Addresstype addresstype1 = new Addresstype();
-		tr.save(addresstype1);
+		//~~Personphone
+		//***
+		List<Person> persons = ps.findAll();
+		List<Phonenumbertype> phonenumbertypes = (List<Phonenumbertype>) hr.findAll();
+		//***
 		
-		//~Phonenumbertype
-		PhonenumbertypeRepository pr = c.getBean(PhonenumbertypeRepository.class);
-		Phonenumbertype phonenumbertype1 = new Phonenumbertype();
-		pr.save(phonenumbertype1);
+		PersonphoneDAO hs = c.getBean(PersonphoneDAO.class);
+		
+		Personphone personphone1 = new Personphone();//:)
+		personphone1.setPerson(persons.get(0));
+		personphone1.setPhonenumbertype(phonenumbertypes.get(0));
+		personphone1.setId( factoryPersonphonePK(1,"3183741903",1) );
+		hs.save(personphone1);
+		
+		Personphone personphone2 = new Personphone();
+		personphone2.setPerson(persons.get(1));
+		personphone2.setPhonenumbertype(phonenumbertypes.get(1));
+		personphone2.setId( factoryPersonphonePK(2,"3158728989",2) );
+		hs.save(personphone2);
+		
+		Personphone personphone3 = new Personphone();
+		personphone3.setPerson(persons.get(2));
+		personphone3.setPhonenumbertype(phonenumbertypes.get(1));
+		personphone3.setId( factoryPersonphonePK(3,"3188031038",2) );
+		hs.save(personphone3);
+		
+		Personphone personphone4 = new Personphone();
+		personphone4.setPerson(persons.get(1));
+		personphone4.setPhonenumbertype(phonenumbertypes.get(0));
+		personphone4.setId( factoryPersonphonePK(2,"3182352827",1) );
+		hs.save(personphone4);
+		
+		Personphone personphone5 = new Personphone();
+		personphone5.setPerson(persons.get(2));
+		personphone5.setPhonenumbertype(phonenumbertypes.get(1));
+		personphone5.setId( factoryPersonphonePK(3,"3115890190",2) );
+		hs.save(personphone5);
 		
 		//~Store
 		StoreDAO str = c.getBean(StoreDAO.class);

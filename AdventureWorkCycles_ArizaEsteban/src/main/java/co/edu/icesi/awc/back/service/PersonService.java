@@ -2,9 +2,12 @@ package co.edu.icesi.awc.back.service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.javatuples.Pair;
 import org.springframework.stereotype.Service;
 
 import co.edu.icesi.awc.back.dao.PersonDAO;
@@ -86,8 +89,16 @@ public class PersonService{
 		return personRepository.findByPersontype(persontype);
 	}
 	
-	public Iterable<?> findBySpecialQuery(Timestamp start, Timestamp end){
-		return personRepository.specialQuery(start, end);
+	public Iterable<Pair<Person,Long>> findBySpecialQuery(Timestamp start, Timestamp end){
+		@SuppressWarnings("unchecked")
+		List<Object[]> data = (List<Object[]>) personRepository.specialQuery(start, end);
+		
+		ArrayList<Pair<Person,Long>> tuples = new ArrayList<>();
+		data.forEach(d -> {
+			tuples.add(Pair.with((Person)d[0],(Long)d[1]));
+		});
+		
+		return tuples;
 	}
 	
 	//~Delete
